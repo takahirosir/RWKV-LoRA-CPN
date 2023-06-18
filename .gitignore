@@ -1,4 +1,4 @@
-*.txt
+# *.txt
 *.csv
 *.pth
 *.xlsb

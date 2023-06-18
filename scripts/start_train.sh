@@ -10,8 +10,8 @@ python train.py \
 --vocab_size 50277 \
 --ctx_len 4096 \
 --accumulate_grad_batches 8 \
---epoch_steps 100 \  # 1000
---epoch_count 1 \    # 20
+--epoch_steps 100 \
+--epoch_count 1 \
 --epoch_begin 0 \
 --epoch_save 5 \
 --micro_bsz 1 \

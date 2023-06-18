@@ -1,11 +1,12 @@
+source scripts/common.sh 
 cd RWKV-v4neo
 # cd  ~/train/RWKV-LM-LoRA/RWKV-v4neo
 
 python train.py \
---load_model "/root/autodl-tmp/model/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth" \
---proj_dir /root/autodl-tmp/lora_checkpoints \
---data_file "/root/autodl-tmp/data/_text_document" \
---data_type binidx \
+--load_model "$MODEL_PATH/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth" \
+--proj_dir $PROJECT_PATH/lora_checkpoints \
+--data_file "$DATASET_PATH/databricks-dolly-15k.jsonl" \
+--data_type utf-8 \
 --vocab_size 50277 \
 --ctx_len 4096 \
 --accumulate_grad_batches 8 \

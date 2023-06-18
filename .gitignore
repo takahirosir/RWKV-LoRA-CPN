@@ -149,3 +149,5 @@ models/
 datasets/
 .jsonl
 
+# project
+project/

@@ -9,7 +9,7 @@ data/
 vocab.json
 *log/
 test/
-tools/
+# tools/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

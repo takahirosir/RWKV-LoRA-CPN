@@ -3,9 +3,12 @@
 ########################################################################################################
 
 print('Loading...')
+import os, copy, types, gc, sys
+# Set RWKV_JIT_ON
+os.environ["RWKV_JIT_ON"] = "1"
+
 from src.model_run import RWKV_RNN
 import numpy as np
-import os, copy, types, gc, sys
 import torch
 from src.utils import TOKENIZER
 try:
@@ -35,10 +38,11 @@ args.pre_ffn = 0
 args.grad_cp = 0
 args.my_pos_emb = 0
 
-args.MODEL_NAME = '/home/blealtancao/rwkv-models/RWKV-4-Pile-14B-20230227-ctx4096-test503'
-args.n_layer = 40
-args.n_embd = 5120
-args.ctx_len = 1024
+# args.MODEL_NAME = '/home/blealtancao/rwkv-models/RWKV-4-Pile-14B-20230227-ctx4096-test503'
+args.MODEL_NAME = '/root/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
+args.n_layer = 32
+args.n_embd = 2560
+args.ctx_len = 4096
 
 # Modify this to use LoRA models; lora_r = 0 will not use LoRA weights.
 args.MODEL_LORA = '/home/blealtancao/rwkv-models/lora-full-1e-4/rwkv-33'

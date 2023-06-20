@@ -1,8 +1,35 @@
 import os
+import errno
 import jsonlines
+import argparse
 
-novel_folder = "/root/autodl-tmp/txt"
-output_file = "/root/autodl-tmp/jsonl/text.jsonl"
+def ValidateFilepath(filepath: str) -> str:
+    """
+    Validate if the provided filepath exists.
+
+    Args:
+        filepath [str]: the file path.
+
+    Raises:
+        FileNotFoundError if the filepath does not exist.
+
+    Returns:
+        The filepath if it is existed.
+    """
+    if not os.path.isdir(filepath):
+        raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), filepath)
+    return filepath
+
+parser = argparse.ArgumentParser(description="Convert a novel from txt format to jsonl format.")
+
+parser.add_argument("--input", default="", type=str, help="The path to the input txt dir.")
+parser.add_argument("--output", default="", type=str, help="The path to the output jsonl file.")
+
+args = parser.parse_args()
+
+
+novel_folder = ValidateFilepath(args.input)
+output_file = args.output
 
 novel_id =1
 

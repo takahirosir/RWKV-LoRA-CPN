@@ -10,3 +10,4 @@ and in the 2nd bash: if don't uese conda, please 'pip install -r requirements.tx
 ## REFERENCE
 1. https://www.codewithgpu.com/i/Blealtan/RWKV-LM-LoRA/RWKV-LM-LoRA
 2. https://www.bilibili.com/read/cv22445881
+3. https://zhuanlan.zhihu.com/p/629809101

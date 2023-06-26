@@ -10,21 +10,13 @@ BINIDX_DIR=$DATASET_DIR/binidx
 mkdir -p $DATASET_DIR
 
 # Convert txt files to jsonl
-python $JSON2BINIDX_DIR/txt2jsonl.py \
+python tools/txt2jsonl.py \
 --input=$INPUT_DIR \
 --output=$JSONL_FILEPATH
 
 # Convert jsonl file to binidx
 echo Converting jsonl file $JSONL_FILEPATH into binidx...
 cd $JSON2BINIDX_DIR
-# python3 tools/preprocess_data.py \
-# --input $JSONL_FILEPATH \
-# --output-prefix $BINIDX_DIR/ \
-# --vocab $RWKV_DIR/20B_tokenizer.json \
-# --dataset-impl mmap \
-# --tokenizer-type HFTokenizer \
-# --append-eod
-# echo Conversion done, output path: $BINIDX_DIR
 
 python tools/preprocess_data.py \
 --input $JSONL_FILEPATH \

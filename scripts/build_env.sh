@@ -5,8 +5,7 @@
 # conda install pip
 pip install -r requirements.txt
 
-cd gpt-neox-RWKV
-pip install -r requirements.txt && pip install -r requirements-onebitadam.txt && \
-    pip install -r requirements-sparseattention.txt && \
-    pip install protobuf==3.20.* && \
-    pip cache purge
+# Build env for gpt-neox-RWKV
+cd json2binidx_tool
+pip install -r requirements.txt
+

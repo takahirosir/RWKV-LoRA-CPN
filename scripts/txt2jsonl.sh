@@ -1,22 +1,35 @@
 #!/bin/bash
-RWKV_DIR=RWKV-v4neo
-NEOX_DIR=gpt-neox-RWKV
+RWKV_DIR=$PWD/RWKV-v4neo
+JSON2BINIDX_DIR=json2binidx_tool
 INPUT_DIR=$PWD/example
-JSONL_FILEPATH=$PWD/datasets/noval_example.jsonl
-BINIDX_DIR=$PWD/datasets/binidx
+DATASET_DIR=$PWD/datasets
+JSONL_FILEPATH=$DATASET_DIR/noval_example.jsonl
+BINIDX_DIR=$DATASET_DIR/binidx
 
-echo Converting txt files into jsonl files...
-python $NEOX_DIR/txt2jsonl.py \
+# Create dirs
+mkdir -p $DATASET_DIR
+
+# Convert txt files to jsonl
+python $JSON2BINIDX_DIR/txt2jsonl.py \
 --input=$INPUT_DIR \
 --output=$JSONL_FILEPATH
-echo Conversion done, output path: $JSONL_FILEPATH
 
+# Convert jsonl file to binidx
 echo Converting jsonl file $JSONL_FILEPATH into binidx...
-python3 $NEOX_DIR/tools/preprocess_data.py \
+cd $JSON2BINIDX_DIR
+# python3 tools/preprocess_data.py \
+# --input $JSONL_FILEPATH \
+# --output-prefix $BINIDX_DIR/ \
+# --vocab $RWKV_DIR/20B_tokenizer.json \
+# --dataset-impl mmap \
+# --tokenizer-type HFTokenizer \
+# --append-eod
+# echo Conversion done, output path: $BINIDX_DIR
+
+python tools/preprocess_data.py \
 --input $JSONL_FILEPATH \
---output-prefix $BINIDX_DIR/ \
---vocab $RWKV_DIR/20B_tokenizer.json \
+--output-prefix $BINIDX_DIR \
+--vocab ./20B_tokenizer.json \
 --dataset-impl mmap \
 --tokenizer-type HFTokenizer \
 --append-eod
-echo Conversion done, output path: $BINIDX_DIR

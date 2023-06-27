@@ -13,4 +13,4 @@ wget $MODEL_URL -P $MODEL_PATH/
 
 # Create dataset folder and download dataset
 mkdir -p $DATASET_PATH
-wget https://huggingface.co/datasets/databricks/databricks-dolly-15k/resolve/main/databricks-dolly-15k.jsonl -P $DATASET_PATH/
+# wget https://huggingface.co/datasets/databricks/databricks-dolly-15k/resolve/main/databricks-dolly-15k.jsonl -P $DATASET_PATH/

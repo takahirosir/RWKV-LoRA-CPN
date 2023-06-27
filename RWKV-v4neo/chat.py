@@ -40,14 +40,14 @@ args.my_pos_emb = 0
 
 # args.MODEL_NAME = '/home/blealtancao/rwkv-models/RWKV-4-Pile-14B-20230227-ctx4096-test503'
 # args.MODEL_NAME = '/root/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
-args.MODEL_NAME = '/root/autodl-tmp/model/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
+args.MODEL_NAME = '/root/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
 args.n_layer = 32
 args.n_embd = 2560
 args.ctx_len = 4096
 
 # Modify this to use LoRA models; lora_r = 0 will not use LoRA weights.
 # args.MODEL_LORA = '/home/blealtancao/rwkv-models/lora-full-1e-4/rwkv-33'
-args.MODEL_LORA = '/root/autodl-tmp/lora_checkpoints/rwkv-19'
+args.MODEL_LORA = '/root/RWKV-LoRA-CPN/project/lora_checkpoints/rwkv-0'
 # args.lora_r = 0
 args.lora_r = 8
 args.lora_alpha = 32
@@ -109,10 +109,10 @@ Now talk with the bot and enjoy. Remember to +reset periodically to clean up the
 This is not instruct-tuned for conversation yet, so don't expect good quality. Better use +gen for free generation.
 '''
 elif CHAT_LANG == 'Chinese':
-    args.MODEL_NAME = '/fsx/BlinkDL/CODE/_PUBLIC_/RWKV-LM/RWKV-v4neo/7-run3z/rwkv-293'
-    args.n_layer = 32
-    args.n_embd = 4096
-    args.ctx_len = 1024
+    # args.MODEL_NAME = '/fsx/BlinkDL/CODE/_PUBLIC_/RWKV-LM/RWKV-v4neo/7-run3z/rwkv-293'
+    # args.n_layer = 32
+    # args.n_embd = 4096
+    # args.ctx_len = 1024
 
     user = "Q"
     bot = "A"

@@ -13,7 +13,7 @@ python3 ./train.py \
 --accumulate_grad_batches 8 \
 --epoch_steps 1000 \
 --epoch_count 10 \
---epoch_begin 18 \
+--epoch_begin 0 \
 --epoch_save 1 \
 --micro_bsz 1 \
 --n_layer 32 \

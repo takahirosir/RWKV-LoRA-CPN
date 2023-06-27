@@ -14,7 +14,7 @@ and in the 2nd bash: if don't uese conda, please 'pip install -r requirements.tx
 
 
 ## NOTICE in scripts/start_train.sh: 
-1. in dataset.py: ctx_len represent the tokens number in jsonl, we change it into 70 for satisfy the number of self.data_size is bigger than req_len
+1. ctx_len represent the tokens number in jsonl, we change it into 70 for satisfy the number of self.data_size is bigger than req_len(in dataset.py)
 2. epoch_steps 1000 for every epoch
 3. epoch_count 10 is useless
 4. epoch_begin * when load a lora model you can begin in next number

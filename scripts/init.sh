@@ -1,5 +1,5 @@
-mkdir /root/autodl-tmp/txt
-mkdir /root/autodl-tmp/data
-mkdir /root/autodl-tmp/jsonl
-mkdir /root/autodl-tmp/model
-mkdir /root/autodl-tmp/lora_checkpoints
+mkdir /root/code/txt
+mkdir /root/code/data
+mkdir /root/code/jsonl
+mkdir /root/code/model
+mkdir /root/code/lora_checkpoints

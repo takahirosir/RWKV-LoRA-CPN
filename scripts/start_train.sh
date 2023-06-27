@@ -1,8 +1,9 @@
+#Change path: load_model, proj_dir, data_file
 cd RWKV-v4neo
 python3 ./train.py \
---load_model "/root/autodl-tmp/model/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth" \
---proj_dir /root/autodl-tmp/lora_checkpoints \
---data_file "/root/autodl-tmp/data/_text_document" \
+--load_model "/root/code/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth" \
+--proj_dir /root/code/lora_checkpoints \
+--data_file "/root/code/data/_text_document" \
 --data_type binidx \
 --vocab_size 50277 \
 --ctx_len 70 \

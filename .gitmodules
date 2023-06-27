@@ -1,0 +1,3 @@
+[submodule "json2binidx_tool"]
+	path = json2binidx_tool
+	url = https://github.com/Abel2076/json2binidx_tool.git

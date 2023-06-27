@@ -20,7 +20,7 @@ torch.backends.cudnn.allow_tf32 = True
 torch.backends.cuda.matmul.allow_tf32 = True
 np.set_printoptions(precision=4, suppress=True, linewidth=200)
 
-CHAT_LANG = 'English' # English Chinese
+CHAT_LANG = 'Chinese' # English Chinese
 
 WORD_NAME = [
     "20B_tokenizer.json",
@@ -39,15 +39,19 @@ args.grad_cp = 0
 args.my_pos_emb = 0
 
 # args.MODEL_NAME = '/home/blealtancao/rwkv-models/RWKV-4-Pile-14B-20230227-ctx4096-test503'
-args.MODEL_NAME = '/root/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
+# args.MODEL_NAME = '/root/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
+args.MODEL_NAME = '/root/autodl-tmp/model/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
 args.n_layer = 32
 args.n_embd = 2560
 args.ctx_len = 4096
 
 # Modify this to use LoRA models; lora_r = 0 will not use LoRA weights.
-args.MODEL_LORA = '/home/blealtancao/rwkv-models/lora-full-1e-4/rwkv-33'
-args.lora_r = 0
-args.lora_alpha = 16
+# args.MODEL_LORA = '/home/blealtancao/rwkv-models/lora-full-1e-4/rwkv-33'
+args.MODEL_LORA = '/root/autodl-tmp/lora_checkpoints/rwkv-19'
+# args.lora_r = 0
+args.lora_r = 8
+args.lora_alpha = 32
+# args.lora_alpha = 16
 
 # args.MODEL_NAME = '/fsx/BlinkDL/HF-MODEL/rwkv-4-pile-7b/RWKV-4-Pile-7B-20221115-8047'
 # args.n_layer = 32

@@ -5,11 +5,11 @@ python3 ./train.py \
 --data_file "/root/autodl-tmp/data/_text_document" \
 --data_type binidx \
 --vocab_size 50277 \
---ctx_len 4096 \
+--ctx_len 70 \
 --accumulate_grad_batches 8 \
---epoch_steps 100 \
+--epoch_steps 1000 \
 --epoch_count 10 \
---epoch_begin 0 \
+--epoch_begin 18 \
 --epoch_save 1 \
 --micro_bsz 1 \
 --n_layer 32 \
@@ -29,7 +29,7 @@ python3 ./train.py \
 --grad_cp 1 \
 --lora \
 --lora_r 8 \
---lora_alpha 64 \
---lora_dropout 0.01 \
+--lora_alpha 32 \
+--lora_dropout 0.0 \
 --lora_parts=att,ffn,time,ln \
---lora_load /root/autodl-tmp/lora_checkpoints/rwkv-12.pth \
+--lora_load /root/autodl-tmp/lora_checkpoints/rwkv-17.pth

@@ -179,6 +179,9 @@ class MyDataset(Dataset):
                     # print(f"epoch {epoch} idx {idx} rank {rank}/{world_size} ii {ii} pos {round(i / self.data_size, 3)}")
                 else:
                     # cheat: pick a random spot in dataset
+                    # check the number of req_len and self.data_size
+                    print(req_len)
+                    print(self.data_size)
                     i = np.random.randint(0, self.data_size - req_len)
 
                 if args.data_type == "binidx":

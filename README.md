@@ -5,8 +5,8 @@
 4. `bash scripts/convert_dataset.sh example/overfitting`
 5. `bash scripts/start_train.sh`
 
-now the 4th bash has something wrong with it
-and in the 2nd bash: if don't uese conda, please 'pip install -r requirements.txt' directly.
+In the 2nd bash: if don't uese conda, please 'pip install -r requirements.txt' directly.
+In RWKV-v4neo/src/dataset.py, you need to annotation print(req_len) && print(self.data_size)
 
 ## REFERENCE
 1. https://www.codewithgpu.com/i/Blealtan/RWKV-LM-LoRA/RWKV-LM-LoRA

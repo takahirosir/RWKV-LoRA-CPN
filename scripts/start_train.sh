@@ -1,8 +1,12 @@
+#!/bin/bash
+source scripts/common.sh
+
 cd RWKV-v4neo
+# Introduction of the parameters: https://zhuanlan.zhihu.com/p/629809101
 python3 ./train.py \
---load_model "/root/autodl-tmp/model/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth" \
---proj_dir /root/autodl-tmp/lora_checkpoints \
---data_file "/root/autodl-tmp/data/_text_document" \
+--load_model $MODEL_DIR/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth \
+--proj_dir $PROJECT_DIR/lora_checkpoints \
+--data_file $DATASET_DIR/_text_document \
 --data_type binidx \
 --vocab_size 50277 \
 --ctx_len 70 \
@@ -32,4 +36,4 @@ python3 ./train.py \
 --lora_alpha 32 \
 --lora_dropout 0.0 \
 --lora_parts=att,ffn,time,ln \
---lora_load /root/autodl-tmp/lora_checkpoints/rwkv-17.pth
+# --lora_load /root/autodl-tmp/lora_checkpoints/rwkv-17.pth

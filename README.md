@@ -1,8 +1,9 @@
 ## Get Started:
-1. cd RWKV-LoRA-CPN
-2. bash scripts/build_env.sh
-3. bash scripts/prepare_model_and_dataset.sh
-4. bash scripts/start_train.sh
+1. `cd RWKV-LoRA-CPN`
+2. `bash scripts/build_env.sh`
+3. `bash scripts/download_model_and_dataset.sh`
+4. `bash scripts/convert_dataset.sh example/overfitting`
+5. `bash scripts/start_train.sh`
 
 now the 4th bash has something wrong with it
 and in the 2nd bash: if don't uese conda, please 'pip install -r requirements.txt' directly.

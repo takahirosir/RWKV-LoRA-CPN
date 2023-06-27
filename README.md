@@ -2,6 +2,7 @@
 1. cd RWKV-LoRA-CPN
 2. bash scripts/build_env.sh
 3. bash scripts/prepare_model_and_dataset.sh
+4. bash scripts/jsonl2binidx.sh
 4. bash scripts/start_train.sh
 
 now the 4th bash has something wrong with it

@@ -26,11 +26,12 @@ python3 ./train.py \
 --beta1 0.9 \
 --beta2 0.999 \
 --adam_eps 1e-8 \
---accelerator gpu \
---devices 1 \
---precision fp16 \
---strategy ddp_find_unused_parameters_false \
---grad_cp 1 \
+# --accelerator gpu \
+# --devices 1 \
+# --precision fp16 \
+# --strategy ddp_find_unused_parameters_false \
+# --grad_cp 1 \
+# these args is useless
 --lora \
 --lora_r 8 \
 --lora_alpha 32 \

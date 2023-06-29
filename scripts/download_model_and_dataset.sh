@@ -15,3 +15,8 @@ wget $MODEL_URL -P $MODEL_DIR/
 mkdir -p $DATASET_DIR
 # wget https://huggingface.co/datasets/databricks/databricks-dolly-15k/resolve/main/databricks-dolly-15k.jsonl -P $DATASET_PATH/
 # This data(jsonl) file is useless
+
+# Actually in AutoDL/gupshare ect. domestic GPU web, there will be like such "Unable to establish SSL connection." problem
+# Please refer to the following method
+# AutoDL https://www.autodl.com/docs/network_turbo/
+# GPUshare https://gpushare.com/docs/instance/network_turbo/

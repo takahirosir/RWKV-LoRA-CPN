@@ -1,17 +1,16 @@
 ## Get Started:
 1. `cd RWKV-LoRA-CPN`
 2. `bash scripts/build_env.sh`
-3. `bash scripts/download_model_and_dataset.sh`
+3. `bash scripts/download_model.sh`
 4. `bash scripts/convert_dataset.sh example/overfitting`
 5. `bash scripts/start_train.sh`
+(`bash scripts/overfit.sh`)
+
+## Chat:
+1. `bash scripts/chat.sh`
 
 In the 2nd bash: if don't uese conda, please 'pip install -r requirements.txt' directly.
 In RWKV-v4neo/src/dataset.py, you need to annotation print(req_len) && print(self.data_size)
-
-## REFERENCE
-1. https://www.codewithgpu.com/i/Blealtan/RWKV-LM-LoRA/RWKV-LM-LoRA
-2. https://www.bilibili.com/read/cv22445881
-3. https://zhuanlan.zhihu.com/p/629809101
 
 
 ## NOTICE in scripts/start_train.sh: 
@@ -32,3 +31,8 @@ In RWKV-v4neo/src/dataset.py, you need to annotation print(req_len) && print(sel
 4. args.lora_r = 8
 5. args.lora_alpha = 32
 6. BEFORE RUN chat.py, PLEASE RUN export RWKV_JIT_ON=1 
+
+## REFERENCE
+1. https://www.codewithgpu.com/i/Blealtan/RWKV-LM-LoRA/RWKV-LM-LoRA
+2. https://www.bilibili.com/read/cv22445881
+3. https://zhuanlan.zhihu.com/p/629809101

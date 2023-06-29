@@ -180,8 +180,8 @@ class MyDataset(Dataset):
                 else:
                     # cheat: pick a random spot in dataset
                     # check the number of req_len and self.data_size
-                    print(req_len)
-                    print(self.data_size)
+                    # print(req_len)
+                    # print(self.data_size)
                     i = np.random.randint(0, self.data_size - req_len)
 
                 if args.data_type == "binidx":

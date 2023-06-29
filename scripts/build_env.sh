@@ -1,4 +1,3 @@
-# The First bash file
 #!/bin/bash
 
 # Fetch sub modules

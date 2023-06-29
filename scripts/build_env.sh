@@ -1,6 +1,8 @@
+# The First bash file
 #!/bin/bash
 
 # Fetch sub modules
+# Fill the json2binidx_tool cause it's another repo form other's
 git submodule update --init
 
 # Build env for RWKV

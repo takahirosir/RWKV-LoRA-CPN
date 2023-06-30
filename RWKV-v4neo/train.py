@@ -373,9 +373,9 @@ if __name__ == "__main__":
         print('!!!!! LoRA Warning: Gradient Checkpointing requires JIT off, disabling it')
         os.environ["RWKV_JIT_ON"] = "0"
 
-    torch.backends.cudnn.benchmark = True
+    torch.backends.cudnn.benchmark = True # use cudnn to speed up DNN
     torch.backends.cudnn.enabled = True
-    # precision==16
+    # precision==fp16
     if args.precision == "fp32":
         torch.backends.cudnn.allow_tf32 = False
         torch.backends.cuda.matmul.allow_tf32 = False
@@ -392,6 +392,7 @@ if __name__ == "__main__":
 
     ########################################################################################################
 
+    # import modules from folder 'src'
     from src.trainer import train_callback, generate_init_weight
     from src.dataset import MyDataset
 

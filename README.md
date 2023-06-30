@@ -1,10 +1,9 @@
 ## Get Started:
 1. `cd RWKV-LoRA-CPN`
 2. `bash scripts/build_env.sh`
-3. `bash scripts/download_model.sh`
-4. `bash scripts/convert_dataset.sh example/overfitting`
-5. `bash scripts/start_train.sh`
-(`bash scripts/overfit.sh`)
+3. `bash scripts/convert_dataset.sh example/overfitting`
+4. `bash scripts/start_train.sh` (to overfit with large model run `bash scripts/overfit.sh` or for smaller model run `bash scripts/overfit-small.sh`)
+
 
 ## Chat:
 1. `bash scripts/chat.sh`

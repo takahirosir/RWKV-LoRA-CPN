@@ -1,14 +1,32 @@
 #!/bin/bash
 source scripts/common.sh
 
-# Adding the following line to avoid the SSL issue during wget
-# Source: https://stackoverflow.com/questions/71692354/facing-ssl-error-with-huggingface-pretrained-models
-CURL_CA_BUNDLE=""
-# Create model folder and download model
-mkdir -p $MODEL_DIR
-MODEL_URL=https://huggingface.co/BlinkDL/rwkv-4-pile-3b/resolve/main/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth
-# MODEL_URL=https://huggingface.co/BlinkDL/rwkv-4-raven/resolve/main/RWKV-4-Raven-3B-v10x-Eng49%25-Chn50%25-Other1%25-20230423-ctx4096.pth
-wget $MODEL_URL -P $MODEL_DIR/
+# The local model path to be updated and used after downloading.
+LOCAL_MODEL_PATH=""
+
+# A function to download a model (.pth) file from a given url.
+# It will only download if the local model is not available.
+function download_model_to_local() {
+    local model_url=${1}
+
+    # Extract the file name from the given url.
+    local filename=${model_url##*/}
+    # Compose the path to the local model file.
+    # The var is global.
+    LOCAL_MODEL_PATH=$MODEL_DIR/$filename
+    # Check if the local model file exits.
+    if [ ! -f $LOCAL_MODEL_PATH ]; then
+        echo local model file $LOCAL_MODEL_PATH does not exits, downloading from $MODEL_URL...
+        # Adding the following line to avoid the SSL issue during wget.
+        # Source: https://stackoverflow.com/questions/71692354/facing-ssl-error-with-huggingface-pretrained-models
+        CURL_CA_BUNDLE=""
+        # Create model folder and download model.
+        mkdir -p $MODEL_DIR
+        # Download the model to the local folder.
+        wget $model_url -P $MODEL_DIR/
+        echo model $MODEL_URL saved to $LOCAL_MODEL_PATH
+    fi
+}
 
 
 # Create dataset folder and download dataset

@@ -1,8 +1,10 @@
 #!/bin/bash
 source scripts/download_model.sh
 
-download_model_to_local https://huggingface.co/BlinkDL/rwkv-4-pile-3b/resolve/main/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312.pth
+# Model card: https://huggingface.co/BlinkDL/rwkv-4-pile-169m
+download_model_to_local https://huggingface.co/BlinkDL/rwkv-4-pile-169m/resolve/main/RWKV-4b-Pile-171M-20230202-7922.pth
 
+# Start training
 cd RWKV-v4neo
 # Introduction of the parameters: https://zhuanlan.zhihu.com/p/629809101
 python3 ./train.py \
@@ -18,8 +20,8 @@ python3 ./train.py \
 --epoch_begin 18 \
 --epoch_save 1 \
 --micro_bsz 1 \
---n_layer 32 \
---n_embd 2560 \
+--n_layer 12 \
+--n_embd 768 \
 --pre_ffn 0 \
 --head_qk 0 \
 --lr_init 1e-3 \
@@ -30,7 +32,7 @@ python3 ./train.py \
 --adam_eps 1e-8 \
 --accelerator gpu \
 --devices 1 \
---precision fp16 \
+--precision fp32 \
 --strategy ddp_find_unused_parameters_false \
 --grad_cp 1 \
 --lora \

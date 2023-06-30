@@ -26,15 +26,15 @@ python3 ./train.py \
 --beta1 0.9 \
 --beta2 0.999 \
 --adam_eps 1e-8 \
-# --accelerator gpu \
-# --devices 1 \
-# --precision fp16 \
-# --strategy ddp_find_unused_parameters_false \
-# --grad_cp 1 \
-# these args is useless
+--accelerator gpu \
+--devices 1 \
+--precision fp16 \
+--strategy ddp_find_unused_parameters_false \
+--grad_cp 1 \
 --lora \
 --lora_r 8 \
 --lora_alpha 32 \
 --lora_dropout 0.0 \
 --lora_parts=att,ffn,time,ln \
 # --lora_load /root/autodl-tmp/lora_checkpoints/rwkv-17.pth
+# some args form 'acceleretor' to 'grad_cp' is in the module pytorch_lighting and they are USEFULL! 

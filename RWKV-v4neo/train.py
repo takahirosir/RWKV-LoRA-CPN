@@ -252,12 +252,15 @@ if __name__ == "__main__":
     args.betas = (args.beta1, args.beta2)
     args.real_bsz = int(args.num_nodes) * int(args.devices) * args.micro_bsz
     os.environ["RWKV_T_MAX"] = str(args.ctx_len)
+    # os.environ['environment variable name/key']='environment variable value' #key&value are both string type
     os.environ["RWKV_MY_TESTING"] = args.my_testing
+    # dim_att==0, dim_ffn==0
     if args.dim_att <= 0:
         args.dim_att = args.n_embd
     if args.dim_ffn <= 0:
         args.dim_ffn = args.n_embd * 4
 
+    # args.data_type=='binidx', choose else
     if args.data_type == "wds_img":
         args.run_name = f"v{args.my_img_version}-{args.my_img_size}-{args.my_img_bit}bit-{args.my_img_clip}x{args.my_img_clip_scale}"
         args.proj_dir = f"{args.proj_dir}-{args.run_name}"
@@ -266,6 +269,7 @@ if __name__ == "__main__":
     if not os.path.exists(args.proj_dir):
         os.makedirs(args.proj_dir)
 
+    # my_pile_stage==0, this if doesn't work
     if args.my_pile_stage > 0:
         magic_prime_bak = args.magic_prime
         if args.ctx_len == 1024:
@@ -344,11 +348,14 @@ if __name__ == "__main__":
     )
     rank_zero_info(str(vars(args)) + "\n")
 
+    # make sure data_type is in the scope of selected
     assert args.data_type in ["utf-8", "utf-16le", "numpy", "binidx", "dummy", "wds_img", "uint16"]
 
+    # make sure learning rate curve is not always equal to 0, this if doesn't work
     if args.lr_final == 0 or args.lr_init == 0:
         rank_zero_info("\n\nNote: lr_final = 0 or lr_init = 0. Using linear LR schedule instead.\n\n")
 
+    # make sure precision is in the scope of selected
     assert args.precision in ["fp32", "tf32", "fp16", "bf16"]
     os.environ["RWKV_FLOAT_MODE"] = args.precision
     if args.precision == "fp32":
@@ -358,14 +365,17 @@ if __name__ == "__main__":
         rank_zero_info("\n\nNote: you are using fp16 (might overflow). Try bf16 / tf32 for stable training.\n\n")
 
     os.environ["RWKV_JIT_ON"] = "1"
+    # strategy is ddp_find_unused_parameters_false, this if doesn't work
     if "deepspeed_stage_3" in args.strategy:
         os.environ["RWKV_JIT_ON"] = "0"
+    # args.lora==true and grad_cp==1, this if works
     if args.lora and args.grad_cp == 1:
         print('!!!!! LoRA Warning: Gradient Checkpointing requires JIT off, disabling it')
         os.environ["RWKV_JIT_ON"] = "0"
 
     torch.backends.cudnn.benchmark = True
     torch.backends.cudnn.enabled = True
+    # precision==16
     if args.precision == "fp32":
         torch.backends.cudnn.allow_tf32 = False
         torch.backends.cuda.matmul.allow_tf32 = False

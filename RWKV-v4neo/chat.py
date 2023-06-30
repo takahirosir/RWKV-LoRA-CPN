@@ -7,6 +7,7 @@ import os, copy, types, gc, sys
 # Set RWKV_JIT_ON
 os.environ["RWKV_JIT_ON"] = "1"
 
+from argparse import ArgumentParser
 from src.model_run import RWKV_RNN
 import numpy as np
 import torch
@@ -29,6 +30,19 @@ WORD_NAME = [
 UNKNOWN_CHAR = None
 tokenizer = TOKENIZER(WORD_NAME, UNKNOWN_CHAR=UNKNOWN_CHAR)
 
+# Parse command line args
+parser = ArgumentParser()
+
+parser.add_argument("--load_model", default="", type=str, help="the path to load local model file (.pth)")
+parser.add_argument("--load_lora", default="", type=str, help="the path to the local lora model file (.pth)")
+parser.add_argument("--n_layer", default=-1, type=int, help="number of layers of the model")
+parser.add_argument("--n_embd", default="-1", type=int, help="the lens of the embedding vector")
+parser.add_argument("--ctx_len", default="-1", type=int, help="the context length")
+parser.add_argument("--lora_r", default=8, type=int, help="the r value of lora")
+parser.add_argument("--lora_alpha", default=32, type=int, help="the alpha value of lora")
+
+cli_args = parser.parse_args()
+
 args = types.SimpleNamespace()
 args.RUN_DEVICE = "cuda"  # 'cpu' (already very fast) // 'cuda'
 args.FLOAT_MODE = "fp16" # fp32 (good for CPU) // fp16 (recommended for GPU) // bf16 (less accurate)
@@ -38,32 +52,16 @@ args.pre_ffn = 0
 args.grad_cp = 0
 args.my_pos_emb = 0
 
-# args.MODEL_NAME = '/home/blealtancao/rwkv-models/RWKV-4-Pile-14B-20230227-ctx4096-test503'
-# args.MODEL_NAME = '/root/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
-# args.MODEL_NAME = '/root/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
-args.MODEL_NAME = '/hy-tmp/RWKV-LoRA-CPN/models/RWKV-4-Pile-3B-Chn-testNovel-done-ctx2048-20230312'
-args.n_layer = 32
-args.n_embd = 2560
-args.ctx_len = 4096
+args.MODEL_NAME = cli_args.load_model
+args.n_layer = cli_args.n_layer
+args.n_embd = cli_args.n_embd
+args.ctx_len = cli_args.ctx_len
 
 # Modify this to use LoRA models; lora_r = 0 will not use LoRA weights.
-# args.MODEL_LORA = '/home/blealtancao/rwkv-models/lora-full-1e-4/rwkv-33'
-# args.MODEL_LORA = '/root/RWKV-LoRA-CPN/project/lora_checkpoints/rwkv-0'
-args.MODEL_LORA = '/hy-tmp/RWKV-LoRA-CPN/project/lora_checkpoints/rwkv-1'
+args.MODEL_LORA = cli_args.load_lora
 # args.lora_r = 0
-args.lora_r = 8
-args.lora_alpha = 32
-# args.lora_alpha = 16
-
-# args.MODEL_NAME = '/fsx/BlinkDL/HF-MODEL/rwkv-4-pile-7b/RWKV-4-Pile-7B-20221115-8047'
-# args.n_layer = 32
-# args.n_embd = 4096
-# args.ctx_len = 1024
-
-# args.MODEL_NAME = '/fsx/BlinkDL/HF-MODEL/rwkv-4-pile-3b/RWKV-4-Pile-3B-20221008-8023'
-# args.n_layer = 32
-# args.n_embd = 2560
-# args.ctx_len = 1024
+args.lora_r = cli_args.lora_r
+args.lora_alpha = cli_args.lora_alpha
 
 if CHAT_LANG == 'English':
     user = "User"
@@ -111,11 +109,6 @@ Now talk with the bot and enjoy. Remember to +reset periodically to clean up the
 This is not instruct-tuned for conversation yet, so don't expect good quality. Better use +gen for free generation.
 '''
 elif CHAT_LANG == 'Chinese':
-    # args.MODEL_NAME = '/fsx/BlinkDL/CODE/_PUBLIC_/RWKV-LM/RWKV-v4neo/7-run3z/rwkv-293'
-    # args.n_layer = 32
-    # args.n_embd = 4096
-    # args.ctx_len = 1024
-
     user = "Q"
     bot = "A"
     interface = ":"

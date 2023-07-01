@@ -6,7 +6,7 @@
 
 
 ## Chat:
-1. `bash scripts/chat.sh`
+1. `bash scripts/chat.sh` (or `bash scripts/chat-small.sh` if you are using the small model.)
 
 In the 2nd bash: if don't uese conda, please 'pip install -r requirements.txt' directly.
 In RWKV-v4neo/src/dataset.py, you need to annotation print(req_len) && print(self.data_size)

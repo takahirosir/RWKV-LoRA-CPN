@@ -14,6 +14,21 @@ from .utils import MaybeIsPrime
 class MyDataset(Dataset):
     def __init__(self, args):
         self.args = args
+        self.vocab_size = args.vocab_size
+
+    def __len__(self):
+        return self.args.epoch_steps * self.args.micro_bsz
+        
+    def __getitem__(self, idx):
+        x = torch.tensor([100] * 70, dtype=torch.long)
+        y = torch.tensor([20] * 70, dtype=torch.long)
+        print(x)
+        print(y)
+        return x, y
+
+class _MyDataset(Dataset):
+    def __init__(self, args):
+        self.args = args
 
         if args.data_type == "binidx":
             self.vocab_size = args.vocab_size

@@ -31,6 +31,12 @@ In RWKV-v4neo/src/dataset.py, you need to annotation print(req_len) && print(sel
 5. args.lora_alpha = 32
 6. BEFORE RUN chat.py, PLEASE RUN export RWKV_JIT_ON=1 
 
+## NOTICE when u use cloud server
+1. when use gpushare.com and can't git/wget or time out, please try `export https_proxy=http://turbo.gpushare.com:30000 http_proxy=http://turbo.gpushare.com:30000` and when u finish download, please `unset http_proxy && unset https_proxy`
+2. when use autoDL and can't git/wget or time out, please try `source /etc/network_turbo` and when u finish download, please `unset http_proxy && unset https_proxy`
+3. gpushare.com reference: https://gpushare.com/docs/instance/network_turbo/
+4. autoDL reference: https://www.autodl.com/docs/network_turbo/
+
 ## REFERENCE
 1. https://www.codewithgpu.com/i/Blealtan/RWKV-LM-LoRA/RWKV-LM-LoRA
 2. https://www.bilibili.com/read/cv22445881

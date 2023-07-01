@@ -12,10 +12,11 @@ from src.model_run import RWKV_RNN
 import numpy as np
 import torch
 from src.utils import TOKENIZER
-try:
-    os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[1]
-except:
-    pass
+# The following section is not necessary if not manually choosing GPUs.
+# try:
+#     os.environ["CUDA_VISIBLE_DEVICES"] = sys.argv[1]
+# except:
+#     pass
 torch.backends.cudnn.benchmark = True
 torch.backends.cudnn.allow_tf32 = True
 torch.backends.cuda.matmul.allow_tf32 = True
@@ -33,32 +34,34 @@ tokenizer = TOKENIZER(WORD_NAME, UNKNOWN_CHAR=UNKNOWN_CHAR)
 # Parse command line args
 parser = ArgumentParser()
 
-parser.add_argument("--load_model", default="", type=str, help="the path to load local model file (.pth)")
+parser.add_argument("--load_model", default="", type=str, required=True, help="the path to load local model file (.pth)")
 parser.add_argument("--load_lora", default="", type=str, help="the path to the local lora model file (.pth)")
-parser.add_argument("--n_layer", default=-1, type=int, help="number of layers of the model")
-parser.add_argument("--n_embd", default="-1", type=int, help="the lens of the embedding vector")
-parser.add_argument("--ctx_len", default="-1", type=int, help="the context length")
-parser.add_argument("--lora_r", default=8, type=int, help="the r value of lora")
+parser.add_argument("--n_layer", default=-1, type=int, required=True, help="number of layers of the model")
+parser.add_argument("--n_embd", default="-1", type=int, required=True, help="the lens of the embedding vector")
+parser.add_argument("--ctx_len", default="-1", type=int, required=True, help="the context length")
+parser.add_argument("--lora_r", default=0, type=int, help="the r value of lora")
 parser.add_argument("--lora_alpha", default=32, type=int, help="the alpha value of lora")
+parser.add_argument("--precision", default="fp32", type=str, choices=["fp16", "fp32", "bf16"], 
+help="the precision to run the model, fp32 (good for CPU) // fp16 (recommended for GPU) // bf16 (less accurate)")
 
 cli_args = parser.parse_args()
 
 args = types.SimpleNamespace()
 args.RUN_DEVICE = "cuda"  # 'cpu' (already very fast) // 'cuda'
-args.FLOAT_MODE = "fp16" # fp32 (good for CPU) // fp16 (recommended for GPU) // bf16 (less accurate)
+args.FLOAT_MODE = cli_args.precision
 args.vocab_size = 50277
 args.head_qk = 0
 args.pre_ffn = 0
 args.grad_cp = 0
 args.my_pos_emb = 0
 
-args.MODEL_NAME = cli_args.load_model
+args.MODEL_NAME = cli_args.load_model[:-4] # remove the trailing .pth
 args.n_layer = cli_args.n_layer
 args.n_embd = cli_args.n_embd
 args.ctx_len = cli_args.ctx_len
 
 # Modify this to use LoRA models; lora_r = 0 will not use LoRA weights.
-args.MODEL_LORA = cli_args.load_lora
+args.MODEL_LORA = cli_args.load_lora[:-4] # remove the trailing .pth
 # args.lora_r = 0
 args.lora_r = cli_args.lora_r
 args.lora_alpha = cli_args.lora_alpha

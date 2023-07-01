@@ -24,6 +24,10 @@ function download_model_to_local() {
         mkdir -p $MODEL_DIR
         # Download the model to the local folder.
         wget $model_url -P $MODEL_DIR/
+        if [ ! -f $LOCAL_MODEL_PATH ]; then
+            print_warning "Download ${model_url} failed!"
+            exit
+        fi
         echo model $MODEL_URL saved to $LOCAL_MODEL_PATH
     fi
 }

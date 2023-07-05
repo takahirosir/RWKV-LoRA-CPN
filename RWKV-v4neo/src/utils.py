@@ -18,6 +18,8 @@ class TOKENIZER():
         if 'list' in str(type(WORD_NAME)):
             self.charMode = False
             if WORD_NAME[0] == WORD_NAME[1]:
+                # according to chat.py WORD_NAME = ["20B_tokenizer.json","20B_tokenizer.json"], we use PreTrainedTokenizerFast
+                # but the question is, why we need to use PreTrainedTokenizerFast? we just use the example we list in the chat.py by 'init_prompt'
                 from transformers import PreTrainedTokenizerFast
                 self.tokenizer = PreTrainedTokenizerFast(tokenizer_file=WORD_NAME[0])
             else:

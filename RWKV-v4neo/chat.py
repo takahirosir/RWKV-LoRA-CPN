@@ -187,12 +187,16 @@ current_state = None
 
 def run_rnn(tokens, newline_adj = 0):
     '''
-    tokens: a list of tokens
-    newline_adj: a number to adjust the probability of newline
-    return: out is a list
+    this function is the main function to run the model
+    Args:
+        tokens: a list of tokens
+        newline_adj: a number to adjust the probability of newline
+    Return: 
+        out: is a list
     '''
     # the following two lines can modify the global variables inner the function
     global model_tokens, current_state
+    tokens = torch.tensor([100]*70, dtype=torch.long)
     # loop through the tokens length
     for i in range(len(tokens)):
         # append the token to the list
@@ -206,6 +210,7 @@ def run_rnn(tokens, newline_adj = 0):
     
     # print(f'### model ###\n[{tokenizer.tokenizer.decode(model_tokens)}]')
 
+    print('out is', out)
     # what is this???
     out[0] = -999999999  # disable <|endoftext|>
     out[187] += newline_adj
@@ -276,6 +281,7 @@ for s in srv_list:
 # ]
 # there is something i don't get it that: 
 # if i change the details of init_prompt, this print will change too, but i don't know why.
+print(model_tokens)
 print(f'### prompt ###\n[{tokenizer.tokenizer.decode(model_tokens)}]\n')
 
 # define a function to print the reply message
@@ -296,6 +302,8 @@ def on_message(message):
 
     # the following two lines (maybe)are used to process the temperature and top_p
     # not used yet 
+    
+    # x_temp = 0 lower temperature will cause the model to generate more predictable text
     x_temp = 1.0
     x_top_p = 0.85
     if ("-temp=" in msg):
